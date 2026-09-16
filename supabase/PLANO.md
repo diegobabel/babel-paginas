@@ -50,13 +50,20 @@ um UUID, sem os prefixos `vc-` / `vv-`.
 | leitura com publishable key | `[]` nas duas tabelas mesmo com registros — RLS segurando |
 | download do storage com publishable key | falha (`Object not found`) |
 
+## Limpeza do Blob
+- [x] `@vercel/blob` removido do `package.json` (nenhum arquivo em `api/` importava mais)
+- [x] Env var `BLOB_READ_WRITE_TOKEN` removida dos 3 ambientes
+- [x] Produção redeployada sem a dependência
+- [ ] **Apagar o Blob store `babel-paginas-blob` (`store_gUBRnWOtnKvm7Gz7`)** — confirmado
+      vazio (0 B, 0 arquivos). O `vercel blob delete-store` foi bloqueado pelo
+      classificador de permissões da sessão; precisa ser feito manualmente, pelo
+      dashboard ou liberando a permissão.
+
 ## Falta
 1. **Rotacionar a `service_role` key.** Ela foi colada no chat durante a configuração,
    então está no histórico da sessão. Rotacionar no dashboard e atualizar a env var.
-2. O push do branch `migracao-supabase` falhou: o git está autenticado como `pedrohph7`,
-   sem escrita em `diegobabel/babel-paginas` (403). Os commits estão locais.
-3. **Agora que está validado:** apagar o Blob store, remover `@vercel/blob` do
-   `package.json` e a env var `BLOB_READ_WRITE_TOKEN`.
+   O `vercel env rm` avisa que remover a variável não revoga a credencial — vale o
+   mesmo aqui: só a rotação no provedor resolve.
 
 ## Notas
 - O Blob store estava vazio (0 arquivos nos 3 prefixos), então não houve dados a migrar.
