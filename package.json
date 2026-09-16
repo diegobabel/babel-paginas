@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@supabase/supabase-js": "^2.116.0",
-    "@vercel/blob": "^2.8.0"
+    "@supabase/supabase-js": "^2.116.0"
   }
 }
