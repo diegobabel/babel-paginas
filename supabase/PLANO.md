@@ -32,13 +32,31 @@ um UUID, sem os prefixos `vc-` / `vv-`.
 - [x] Bucket privado `comprovantes` criado (3 MB, PDF/JPEG/PNG/WebP)
 - [x] `api/_supabase.js` — cliente service role compartilhado + paginação do PostgREST
 - [x] `api/indicacoes.js`, `api/vendas.js`, `api/comprovante.js` reescritos
-- [x] `SUPABASE_URL` e `CHAVE_LEITURA` configuradas nos 3 ambientes da Vercel
+- [x] `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e `CHAVE_LEITURA` nos 3 ambientes da Vercel
+- [x] Testado ponta a ponta em preview e promovido para produção
+
+## Testes ponta a ponta (preview; dados de teste já removidos)
+| Caso | Resultado |
+|---|---|
+| `POST /api/indicacoes` | grava; `referrerCode` normalizado (`abc-123` → `ABC-123`) |
+| `GET /api/indicacoes?chave=` | contrato camelCase, `createdAt` ISO com `Z` |
+| `POST /api/vendas` | grava; `dataVenda` `15/09/2026` → `2026-09-15`; `setup` arredondado a 2 casas |
+| `GET /api/vendas?chave=` | `comprovante.url` aponta para `/api/comprovante` |
+| `GET /api/comprovante` | arquivo volta byte-exato, `content-type` correto |
+| GET sem `chave` | `401 nao-autorizado` |
+| `path=../foo` | `400 caminho-invalido` |
+| path inexistente | `404 nao-encontrado` |
+| URL pública do bucket | falha (`Bucket not found`) — bucket é privado |
+| leitura com publishable key | `[]` nas duas tabelas mesmo com registros — RLS segurando |
+| download do storage com publishable key | falha (`Object not found`) |
 
 ## Falta
-1. `SUPABASE_SERVICE_ROLE_KEY` nas env vars da Vercel (segredo — pegar no dashboard)
-2. Deploy + testar os dois formulários de verdade
-3. **Só depois de validado:** apagar o Blob store, remover `@vercel/blob` do
-   `package.json` e a env var `BLOB_READ_WRITE_TOKEN`
+1. **Rotacionar a `service_role` key.** Ela foi colada no chat durante a configuração,
+   então está no histórico da sessão. Rotacionar no dashboard e atualizar a env var.
+2. O push do branch `migracao-supabase` falhou: o git está autenticado como `pedrohph7`,
+   sem escrita em `diegobabel/babel-paginas` (403). Os commits estão locais.
+3. **Agora que está validado:** apagar o Blob store, remover `@vercel/blob` do
+   `package.json` e a env var `BLOB_READ_WRITE_TOKEN`.
 
 ## Notas
 - O Blob store estava vazio (0 arquivos nos 3 prefixos), então não houve dados a migrar.
