@@ -1,6 +1,7 @@
-import { put, list } from '@vercel/blob';
+import { put, list, get } from '@vercel/blob';
 
-const CHAVE_LEITURA = 'ynKzMeXorDXNObdpfsLL647faUyyEZLZ';
+// Configure CHAVE_LEITURA nas env vars do projeto na Vercel.
+const CHAVE_LEITURA = process.env.CHAVE_LEITURA;
 const PREFIXO = 'vendas/';
 const PLANOS = ['vip', 'profissional', 'basico'];
 const TIPOS = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
@@ -59,21 +60,28 @@ export default async function handler(req, res){
     }
     const bytes = Buffer.from(arq.base64, 'base64');
     if (!bytes.length || bytes.length > MAX_ARQUIVO) return res.status(400).json({ ok:false, erro:'comprovante-tamanho' });
+    // Comprovante é documento financeiro: gravado como privado e servido só via /api/comprovante com chave.
     const up = await put('comprovantes/' + id + '.' + TIPOS[arq.tipo], bytes, {
-      access: 'public', contentType: arq.tipo, addRandomSuffix: true
+      access: 'private', contentType: arq.tipo, addRandomSuffix: true
     });
-    v.comprovante = { url: up.url, nome: limpar(arq.nome, 120) || ('comprovante.' + TIPOS[arq.tipo]), tipo: arq.tipo };
+    v.comprovante = {
+      path: up.pathname,
+      url: '/api/comprovante?path=' + encodeURIComponent(up.pathname),
+      nome: limpar(arq.nome, 120) || ('comprovante.' + TIPOS[arq.tipo]),
+      tipo: arq.tipo
+    };
     v.id = 'vv-' + id;
     v.status = 'pendente';
     v.origem = 'pagina';
     v.createdAt = agora.toISOString();
     await put(PREFIXO + id + '.json', JSON.stringify(v), {
-      access: 'public', contentType: 'application/json', addRandomSuffix: true
+      access: 'private', contentType: 'application/json', addRandomSuffix: true
     });
     return res.status(200).json({ ok:true });
   }
 
   if (req.method === 'GET') {
+    if (!CHAVE_LEITURA) return res.status(503).json({ ok:false, erro:'chave-nao-configurada' });
     const url = new URL(req.url, 'http://x');
     if (url.searchParams.get('chave') !== CHAVE_LEITURA) return res.status(401).json({ ok:false, erro:'nao-autorizado' });
     const desde = url.searchParams.get('desde') || '';
@@ -88,8 +96,10 @@ export default async function handler(req, res){
     const itens = [];
     for (let i = 0; i < alvo.length; i += 10) {
       const lote = await Promise.all(alvo.slice(i, i + 10).map(async x => {
-        try { const r = await fetch(x.url, { cache:'no-store' }); return r.ok ? await r.json() : null; }
-        catch { return null; }
+        try {
+          const r = await get(x.pathname, { access:'private', useCache:false });
+          return r ? await new Response(r.stream).json() : null;
+        } catch { return null; }
       }));
       itens.push(...lote.filter(Boolean));
     }

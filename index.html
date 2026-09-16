@@ -308,6 +308,7 @@ card.classList.add('is-live');
 page.classList.add('is-confirmed');
 playSuccessChime();
 } catch(err){
+console.error('falha ao enviar indicacao:', err);
 step2Error.textContent = 'Não deu pra enviar agora. Manda direto pro time enquanto a gente resolve isso.';
 submitBtn.disabled = false;
 submitBtn.textContent = 'Fazer parte';
