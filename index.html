@@ -1,0 +1,361 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><title>Indicação Babel</title><style>:root{--ink:#050410;--surface:#0E0B22;--surface-2:#141031;--border:rgba(139,111,224,0.22);--border-soft:rgba(139,111,224,0.12);--text:#F3F1FA;--text-2:#ABA3C9;--text-3:#726A93;--violet:#8B6FE0;--violet-deep:#4A2F96;--azure:#4C86E8;--azure-deep:#3568CF;--magenta-deep:#6B3FA0;--grad:linear-gradient(135deg,var(--violet),var(--azure));--ok:#4ADE80;--bad:#F2876B}*{box-sizing:border-box}html,body{margin:0;padding:0}html.gate-lock,html.gate-lock body{height:100%;overflow:hidden}body{position:relative;background:var(--ink);color:var(--text);font-family:'Poppins',system-ui,-apple-system,sans-serif;min-height:100dvh;padding-block:48px;padding-inline:20px;display:flex;justify-content:center;align-items:flex-start}.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;isolation:isolate}.orb{position:absolute;border-radius:50%;filter:blur(90px);mix-blend-mode:screen;will-change:transform;transition:opacity 1.1s ease}.orb-a{width:58vmax;height:58vmax;top:-20vmax;left:-16vmax;background:var(--violet-deep);opacity:.36;animation:orbA 24s ease-in-out infinite alternate}.orb-b{width:60vmax;height:60vmax;bottom:-22vmax;right:-18vmax;background:var(--azure-deep);opacity:.34;animation:orbB 29s ease-in-out infinite alternate}.orb-c{width:42vmax;height:42vmax;top:82%;left:78%;background:var(--magenta-deep);opacity:.24;animation:orbC 20s ease-in-out infinite alternate}.spotlight{position:absolute;inset:0;background:radial-gradient(560px circle at var(--px,18%) var(--py,84%),rgba(139,111,224,.34),transparent 60%),radial-gradient(320px circle at var(--px,18%) var(--py,84%),rgba(76,134,232,.28),transparent 55%);mix-blend-mode:screen;transition:filter 1.1s ease}.ambient.is-active .orb-a{opacity:.47}.ambient.is-active .orb-b{opacity:.45}.ambient.is-active .orb-c{opacity:.34}.ambient.is-active .spotlight{filter:brightness(1.3)}@keyframes orbA{0%{transform:translate(calc(var(--mx,0) * 9vmax),calc(var(--my,0) * 9vmax))}100%{transform:translate(calc(7vmax + var(--mx,0) * 9vmax),calc(9vmax + var(--my,0) * 9vmax))}}@keyframes orbB{0%{transform:translate(calc(var(--mx,0) * -9vmax),calc(var(--my,0) * -9vmax))}100%{transform:translate(calc(-7vmax + var(--mx,0) * -9vmax),calc(-8vmax + var(--my,0) * -9vmax))}}@keyframes orbC{0%{transform:translate(-50%,-50%) translate(calc(var(--mx,0) * 11vmax),calc(var(--my,0) * -11vmax)) scale(1)}100%{transform:translate(-50%,-50%) translate(calc(-6vmax + var(--mx,0) * 11vmax),calc(5vmax + var(--my,0) * -11vmax)) scale(1.18)}}a{color:inherit}h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;text-wrap:balance;margin:0}.gate{position:fixed;top:0;left:0;right:0;height:100dvh;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;overflow-y:auto;overflow-x:hidden;padding:clamp(16px,4dvh,32px) 24px;transition:opacity .6s ease,transform .6s ease}.gate.gate-exit{opacity:0;transform:scale(1.03);pointer-events:none}.gate[hidden]{display:none}.gate-eyebrow{position:relative;margin:0 0 clamp(12px,3.5dvh,28px);text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:600;color:var(--violet);opacity:0;animation:gateFade .9s ease .25s forwards}.gate-core{position:relative;opacity:0;margin-bottom:clamp(14px,3.2dvh,26px);flex:none;animation:gateLogoIn 1s cubic-bezier(.16,1,.3,1) .45s forwards}.gate-logo{width:clamp(120px,20dvh,180px);height:auto;display:block;animation:logoGlow 3.2s ease-in-out .8s infinite}@keyframes gateFade{to{opacity:1}}@keyframes gateLogoIn{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}@keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(139,111,224,.5)) drop-shadow(0 0 22px rgba(76,134,232,.32))}50%{filter:drop-shadow(0 0 20px rgba(139,111,224,.7)) drop-shadow(0 0 38px rgba(76,134,232,.48))}}.gate-lines{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2dvh,16px);text-align:center;min-height:clamp(140px,30dvh,220px);justify-content:flex-start;max-width:430px;flex:none}.gate-line{margin:0;font-family:'Lora',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(15px,3.6dvh,19px);line-height:1.4;color:var(--text-2);text-shadow:0 0 22px rgba(139,111,224,.22);opacity:0;transform:translateY(14px) scale(.96);filter:blur(6px);animation:lineIn .9s cubic-bezier(.16,1,.3,1) forwards}.gate-line[data-line="1"]{animation-delay:1.15s}.gate-line[data-line="2"]{animation-delay:2.0s;color:var(--text)}.gate-line-cue{margin-top:clamp(8px,1.8dvh,12px);font-family:'Poppins',sans-serif;font-style:normal;font-weight:700;font-size:clamp(16px,3.4dvh,20px);line-height:1.35;letter-spacing:.2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:cueIn 1s cubic-bezier(.16,1,.3,1) forwards;animation-delay:3.6s}@keyframes lineIn{to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes cueIn{0%{opacity:0;transform:translateY(10px) scale(.92);filter:blur(8px)}65%{opacity:1;transform:translateY(-3px) scale(1.05);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}.gate-cta{position:relative;flex:none;margin-top:clamp(4px,1dvh,10px);display:inline-flex;align-items:center;gap:10px;padding:clamp(12px,2.4dvh,15px) 30px;border-radius:999px;border:none;background:var(--grad);color:#0A0716;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;pointer-events:none;opacity:0;transform:translateY(8px);animation:lineIn .8s ease forwards;animation-delay:2.8s;transition:box-shadow .25s ease,transform .15s ease,filter .2s ease}.gate-cta svg{width:13px;height:13px;transition:transform .2s ease;flex:none}.gate.is-ready .gate-cta{pointer-events:auto;cursor:pointer;animation:lineIn .8s ease forwards,pulse 2.6s ease-in-out 1s infinite}.gate.is-ready .gate-cta:hover{filter:brightness(1.08)}.gate.is-ready .gate-cta:hover svg{transform:translateX(3px)}.gate.is-ready .gate-cta:active{transform:translateY(0) scale(.97)}@keyframes pulse{0%,100%{box-shadow:0 8px 28px -10px rgba(139,111,224,.55)}50%{box-shadow:0 10px 40px -6px rgba(76,134,232,.7)}}.page{position:relative;width:100%;max-width:460px;display:flex;flex-direction:column;gap:28px;opacity:0;transform:translateY(14px);transition:opacity .7s ease .05s,transform .7s ease .05s}.page.page-in{opacity:1;transform:translateY(0)}.brand{display:flex;align-items:center;gap:9px;justify-content:center}.brand-mark{display:flex;align-items:center;flex:none}.brand-mark img{width:24px;height:auto;display:block;transition:filter .6s ease}.page.is-confirmed .brand-mark img{animation:logoGlow 3.2s ease-in-out infinite}.brand-word{font-family:'Lora',serif;font-size:17px;letter-spacing:0.5px;color:var(--text)}.eyebrow{text-align:center;text-transform:uppercase;letter-spacing:2.2px;font-size:11px;color:var(--violet);font-weight:600}.intro{text-align:center;display:flex;flex-direction:column;gap:8px}.intro h1{font-size:26px;line-height:1.25}.intro p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.55}.card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:22px;overflow:hidden;isolation:isolate;transition:box-shadow .6s ease}.card-neurons{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}.neuron{position:absolute;top:var(--ny,50%);left:var(--nx,50%);width:4px;height:4px;border-radius:50%;background:var(--violet);box-shadow:0 0 9px 2px rgba(139,111,224,.55);opacity:0;animation:neuronDrift var(--dur,15s) ease-in-out var(--delay,0s) infinite}.neuron.azure{background:var(--azure);box-shadow:0 0 9px 2px rgba(76,134,232,.55)}@keyframes neuronDrift{0%{opacity:0;transform:translate(0,0) scale(.6)}18%{opacity:.7}50%{transform:translate(var(--tx,26px),var(--ty,-20px)) scale(1)}82%{opacity:.5}100%{opacity:0;transform:translate(var(--tx2,-16px),var(--ty2,18px)) scale(.6)}}.synapse{position:absolute;top:var(--sy,50%);left:var(--sx,10%);width:var(--sw,70px);height:1px;transform:rotate(var(--srot,0deg));background:linear-gradient(90deg,transparent,rgba(139,111,224,.55),transparent);opacity:0;animation:synapsePulse var(--sdur,8s) ease-in-out var(--sdelay,0s) infinite}@keyframes synapsePulse{0%,100%{opacity:0}48%{opacity:0}58%{opacity:.55}72%{opacity:0}}.card.is-active{animation:cardGlowPulseSoft 4.5s ease-in-out infinite}@keyframes cardGlowPulseSoft{0%,100%{box-shadow:0 0 20px -12px rgba(139,111,224,.26),0 0 42px -18px rgba(76,134,232,.18)}50%{box-shadow:0 0 32px -8px rgba(139,111,224,.4),0 0 60px -14px rgba(76,134,232,.3)}}.card.is-live{animation:cardGlowPulse 2.6s ease-in-out infinite}@keyframes cardGlowPulse{0%,100%{box-shadow:0 0 34px -10px rgba(139,111,224,.4),0 0 70px -18px rgba(76,134,232,.3)}50%{box-shadow:0 0 54px -6px rgba(139,111,224,.6),0 0 100px -12px rgba(76,134,232,.45)}}.card-glow-ring{position:absolute;inset:-2px;border-radius:20px;padding:3px;overflow:hidden;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none;z-index:3;transition:opacity .6s ease}.card-glow-ring::before{content:'';position:absolute;inset:-45%;background:conic-gradient(from 0deg,transparent 0deg,var(--violet) 100deg,var(--azure) 200deg,transparent 260deg,transparent 360deg);will-change:transform}.card.is-active .card-glow-ring{opacity:.5}.card.is-active .card-glow-ring::before{animation:spinRing 9s linear infinite}.card.is-live .card-glow-ring{opacity:1}.card.is-live .card-glow-ring::before{animation:spinRing 3s linear infinite}@keyframes spinRing{to{transform:rotate(360deg)}}.steps{display:flex;gap:8px}.step-dot{position:relative;flex:1;height:4px;border-radius:3px;background:var(--border-soft);overflow:hidden}.step-fill{position:absolute;inset:0;width:0%;border-radius:3px;background:var(--grad);transition:width .3s cubic-bezier(.16,1,.3,1)}.step-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-3);font-weight:600}form{display:flex;flex-direction:column;gap:22px}fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}.fieldset-hidden{display:none}fieldset:not(.fieldset-hidden){animation:stepIn .45s cubic-bezier(.16,1,.3,1)}@keyframes stepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12.5px;color:var(--text-2);font-weight:500}.field .hint{font-size:11.5px;color:var(--text-3);margin:2px 0 0}input[readonly]{opacity:.85;cursor:default;border-style:dashed}.field .field-error{font-size:11.5px;color:var(--bad);margin:2px 0 0;min-height:14px}.field.is-invalid input{border-color:var(--bad)}.field.is-valid input{border-color:var(--ok)}input[type="text"],input[type="tel"],input[type="email"],input[type="date"],select,textarea{appearance:none;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;color:var(--text);font-family:'Poppins',sans-serif;font-size:15px;width:100%;transition:border-color .2s ease,outline-color .2s ease}input[type="date"]{color-scheme:dark}input[type="date"]::-webkit-calendar-picker-indicator{filter:brightness(0) saturate(100%) invert(1);cursor:pointer}textarea{resize:vertical;min-height:72px;font-family:'Poppins',sans-serif}input::placeholder,textarea::placeholder{color:var(--text-3)}input:focus,select:focus,textarea:focus{outline:2px solid var(--violet);outline-offset:1px;border-color:transparent}select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ABA3C9'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%23ABA3C9' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}.actions{display:flex;gap:10px}button{font-family:'Poppins',sans-serif;font-weight:600;font-size:14.5px;border-radius:10px;padding:13px 18px;cursor:pointer;border:1px solid transparent;flex:1;transition:transform .15s ease,filter .15s ease,opacity .15s ease,border-color .2s ease,color .2s ease}.btn-primary{background:var(--grad);color:#0A0716;border:none}.btn-primary:not(:disabled):hover{filter:brightness(1.08)}.btn-primary:not(:disabled):active{transform:scale(.98)}.btn-primary:disabled{opacity:.45;cursor:not-allowed}.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border)}.btn-ghost:hover{border-color:var(--violet);color:var(--text)}.btn-ghost:active{transform:scale(.98)}.error-text{font-size:12px;color:var(--bad);min-height:14px}.confirm{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:12px 4px 4px}.confirm-flash{position:absolute;inset:0;border-radius:18px;background:var(--grad);opacity:0;pointer-events:none;animation:flashPulse .8s ease-out forwards}@keyframes flashPulse{0%{opacity:0}12%{opacity:.3}100%{opacity:0}}.confirm-stage{position:relative;width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}.confirm-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--violet);opacity:0;animation:ringPulse 1.15s ease-out forwards}.confirm-ring.r1{animation-delay:.05s}.confirm-ring.r2{animation-delay:.22s;border-color:var(--azure)}.confirm-ring.r3{animation-delay:.4s}@keyframes ringPulse{0%{transform:scale(1);opacity:.65}100%{transform:scale(2.8);opacity:0}}.confirm-burst{position:absolute;inset:-80px;pointer-events:none}.spark{position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;opacity:0;transform:translate(-50%,-50%);animation:sparkBurst .9s cubic-bezier(.16,1,.3,1) forwards}@keyframes sparkBurst{0%{opacity:1;transform:translate(-50%,-50%) translate(0,0) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--tx),var(--ty)) scale(.3)}}.confirm-badge{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;animation:badgePop .55s cubic-bezier(.34,1.56,.64,1) .12s both,badgeGlow 1.8s ease-in-out .65s 2}.confirm-badge svg{width:22px;height:22px}@keyframes badgePop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}@keyframes badgeGlow{0%,100%{box-shadow:0 0 0 0 rgba(139,111,224,0)}50%{box-shadow:0 0 34px 8px rgba(139,111,224,.5)}}.confirm h2{font-size:20px;opacity:0;transform:translateY(10px);filter:blur(4px);animation:lineIn .6s ease .24s forwards}.confirm-body{margin:0;color:var(--text-2);font-size:14px;line-height:1.6;opacity:0;transform:translateY(10px);filter:blur(4px);animation:lineIn .6s ease .34s forwards}.confirm .who{color:var(--text);font-weight:600}.confirm-affirm{margin:2px 0 0;font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;font-size:15px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(10px);filter:blur(4px);animation:lineIn .6s ease .48s forwards}.foot{text-align:center;color:var(--text-3);font-size:11.5px;letter-spacing:.3px}[hidden]{display:none!important}@media (max-width:400px){.card{padding:22px 18px}.intro h1{font-size:23px}.gate-logo{width:148px}.gate-line{font-size:16px}.gate-line-cue{font-size:16px}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001s!important;scroll-behavior:auto!important}}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Poppins:wght@400;500;600&display=swap"><div class="ambient" aria-hidden="true"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div><div class="spotlight"></div></div><div class="gate" id="gate"><p class="gate-eyebrow">Consciência Artificial</p><div class="gate-core"><img class="gate-logo" src="/logo.webp" alt="babel" /></div><div class="gate-lines" id="gateLines"><p class="gate-line" data-line="1">Tem gente que já está muitos quilômetros na sua frente, mas agora é a sua vez de avançar.</p><p class="gate-line" data-line="2">Quem te indicou já viu o poder da consciência artificial.</p><button type="button" class="gate-cta" id="gateCta"><span>Clique aqui</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="gate-line gate-line-cue" data-line="3">e bora faturar muito mais, com menos investimento e menor esforço.</p></div></div><div class="page" id="page"><div class="brand"><span class="brand-mark" aria-hidden="true"><img src="/logo.webp" alt="" /></span><span class="brand-word">babel</span></div><div class="intro"><p class="eyebrow">Indicação</p><h1>Alguém que já é babel te indicou. Hora de pensar melhor o seu negócio.</h1><p id="introSub">Deixe seus dados aqui. Nosso time entra em contato — a babel já está pensando em como te ajudar.</p></div><div class="card" id="card"><div class="card-neurons" aria-hidden="true"><span class="neuron" style="--nx:12%;--ny:18%;--dur:13s;--delay:0s;--tx:22px;--ty:-16px;--tx2:-10px;--ty2:14px;"></span><span class="neuron azure" style="--nx:82%;--ny:10%;--dur:16s;--delay:1.4s;--tx:-24px;--ty:20px;--tx2:12px;--ty2:-10px;"></span><span class="neuron" style="--nx:88%;--ny:46%;--dur:14.5s;--delay:2.8s;--tx:-18px;--ty:-22px;--tx2:14px;--ty2:16px;"></span><span class="neuron azure" style="--nx:8%;--ny:58%;--dur:17s;--delay:.6s;--tx:20px;--ty:18px;--tx2:-16px;--ty2:-12px;"></span><span class="neuron" style="--nx:50%;--ny:82%;--dur:15.5s;--delay:3.5s;--tx:16px;--ty:-20px;--tx2:-12px;--ty2:10px;"></span><span class="neuron azure" style="--nx:30%;--ny:34%;--dur:12.5s;--delay:2.1s;--tx:-14px;--ty:16px;--tx2:10px;--ty2:-18px;"></span><span class="neuron" style="--nx:68%;--ny:72%;--dur:18s;--delay:.9s;--tx:18px;--ty:14px;--tx2:-14px;--ty2:-16px;"></span><span class="neuron azure" style="--nx:20%;--ny:92%;--dur:16.5s;--delay:2.3s;--tx:20px;--ty:-18px;--tx2:-16px;--ty2:12px;"></span><span class="neuron" style="--nx:76%;--ny:88%;--dur:14s;--delay:.4s;--tx:-16px;--ty:16px;--tx2:14px;--ty2:-14px;"></span><span class="neuron azure" style="--nx:44%;--ny:64%;--dur:17.5s;--delay:3.1s;--tx:18px;--ty:-14px;--tx2:-12px;--ty2:18px;"></span><span class="neuron" style="--nx:14%;--ny:76%;--dur:13.5s;--delay:1.8s;--tx:-14px;--ty:-16px;--tx2:16px;--ty2:12px;"></span><span class="neuron azure" style="--nx:60%;--ny:96%;--dur:15s;--delay:4s;--tx:16px;--ty:14px;--tx2:-18px;--ty2:-10px;"></span><span class="neuron" style="--nx:36%;--ny:12%;--dur:16s;--delay:.2s;--tx:-18px;--ty:16px;--tx2:12px;--ty2:-14px;"></span><span class="synapse" style="--sx:6%;--sy:24%;--sw:64px;--srot:18deg;--sdur:8.5s;--sdelay:.3s;"></span><span class="synapse" style="--sx:58%;--sy:64%;--sw:80px;--srot:-14deg;--sdur:9.5s;--sdelay:2.6s;"></span><span class="synapse" style="--sx:30%;--sy:88%;--sw:56px;--srot:8deg;--sdur:7.8s;--sdelay:1.5s;"></span><span class="synapse" style="--sx:68%;--sy:22%;--sw:60px;--srot:-10deg;--sdur:8.9s;--sdelay:3.4s;"></span><span class="synapse" style="--sx:12%;--sy:96%;--sw:70px;--srot:14deg;--sdur:9.1s;--sdelay:.9s;"></span></div><div class="card-glow-ring" aria-hidden="true"></div><div><div class="steps"><div class="step-dot"><div class="step-fill" id="fillStep1"></div></div><div class="step-dot"><div class="step-fill" id="fillStep2"></div></div></div><div style="height:8px"></div><p class="step-label" id="stepLabel">Passo 1 de 2 — o essencial</p></div><form id="indicacaoForm" novalidate><div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="website">Não preencha</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div><fieldset id="fieldsetStep1"><div class="field"><label for="referrerName">Quem te indicou pra babel?</label><input type="text" id="referrerName" name="referrerName" placeholder="Nome de quem te indicou" required><p class="hint" id="referrerHint" hidden>Você chegou pelo link de indicação dessa pessoa.</p></div><div class="field"><label for="leadName">Seu nome</label><input type="text" id="leadName" name="leadName" placeholder="Seu nome completo" required></div><div class="field" id="whatsappField"><label for="leadWhatsapp">Seu WhatsApp</label><input type="tel" id="leadWhatsapp" name="leadWhatsapp" placeholder="(00) 00000-0000" inputmode="tel" maxlength="16" required><p class="field-error" id="whatsappError"></p></div><p class="error-text" id="step1Error"></p><div class="actions"><button type="button" class="btn-primary" id="toStep2">Continuar</button></div></fieldset><fieldset id="fieldsetStep2" class="fieldset-hidden"><div class="field"><label for="company">Sua empresa</label><input type="text" id="company" name="company" placeholder="Nome da sua empresa" required></div><div class="field"><label for="niche">Nicho / segmento</label><input type="text" id="niche" name="niche" placeholder="Ex: clínica odontológica, loja de roupas..." required></div><div class="field"><label for="need">O que você busca resolver</label><textarea id="need" name="need" placeholder="Ex: perco venda porque demoro pra responder cliente" required></textarea></div><div class="field" id="emailField"><label for="leadEmail">Seu e-mail</label><input type="email" id="leadEmail" name="leadEmail" placeholder="nome@empresa.com" inputmode="email" required><p class="field-error" id="emailError"></p></div><div class="field"><label for="bestTime">Melhor horário pra contato</label><select id="bestTime" name="bestTime" required><option value="" disabled selected>Selecione um horário</option><option value="manha">Manhã</option><option value="tarde">Tarde</option><option value="noite">Noite</option></select></div><div class="field"><label for="meetingDate">Melhor dia pra conversar</label><input type="date" id="meetingDate" name="meetingDate" required><p class="hint">Não garantimos esse horário exato, mas tentamos encaixar o que for possível.</p></div><p class="error-text" id="step2Error"></p><div class="actions"><button type="button" class="btn-ghost" id="toStep1">Voltar</button><button type="submit" class="btn-primary" id="submitBtn">Fazer parte</button></div></fieldset></form><div class="confirm" id="confirmView" hidden><div class="confirm-flash" aria-hidden="true"></div><div class="confirm-stage" aria-hidden="true"><div class="confirm-burst" id="confirmBurst"></div><div class="confirm-ring r1"></div><div class="confirm-ring r2"></div><div class="confirm-ring r3"></div><div class="confirm-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#0A0716" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><h2>Pronto. A partir de agora, só aguardar.</h2><p class="confirm-body">Em até 24 horas, nós aqui da babel vamos falar com você — o que vamos te mostrar será capaz de transformar a sua empresa.</p><p class="confirm-affirm">Seja bem-vindo(a). A partir de agora, deixe o resto com a babel.</p></div></div><p class="foot">babel · Consciência Artificial</p></div><script>
+(function(){
+var referrerNameEl = document.getElementById('referrerName');
+var leadNameEl = document.getElementById('leadName');
+var leadWhatsappEl = document.getElementById('leadWhatsapp');
+var companyEl = document.getElementById('company');
+var nicheEl = document.getElementById('niche');
+var needEl = document.getElementById('need');
+var leadEmailEl = document.getElementById('leadEmail');
+var bestTimeEl = document.getElementById('bestTime');
+var meetingDateEl = document.getElementById('meetingDate');
+var stepLabel = document.getElementById('stepLabel');
+var fieldsetStep1 = document.getElementById('fieldsetStep1');
+var fieldsetStep2 = document.getElementById('fieldsetStep2');
+var form = document.getElementById('indicacaoForm');
+var confirmView = document.getElementById('confirmView');
+var step1Error = document.getElementById('step1Error');
+var step2Error = document.getElementById('step2Error');
+var submitBtn = document.getElementById('submitBtn');
+var fillStep1 = document.getElementById('fillStep1');
+var fillStep2 = document.getElementById('fillStep2');
+var confirmBurst = document.getElementById('confirmBurst');
+var card = document.getElementById('card');
+var whatsappFieldEl = document.getElementById('whatsappField');
+var whatsappErrorEl = document.getElementById('whatsappError');
+var emailFieldEl = document.getElementById('emailField');
+var emailErrorEl = document.getElementById('emailError');
+try{
+meetingDateEl.min = new Date().toISOString().slice(0,10);
+}catch(e){}
+var ENDPOINT = '/api/indicacoes';
+var referrerCode = '';
+(function(){
+try{
+var params = new URLSearchParams(location.search);
+if(!params.get('ref') && location.hash.indexOf('ref=') >= 0){
+params = new URLSearchParams(location.hash.replace(/^#/, ''));
+}
+referrerCode = (params.get('ref') || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 40);
+var por = (params.get('por') || '').trim().slice(0, 80);
+if(referrerCode){
+try{ localStorage.setItem('babelRef', JSON.stringify({ref: referrerCode, por: por})); }catch(e){}
+} else {
+try{
+var salvo = JSON.parse(localStorage.getItem('babelRef') || 'null');
+if(salvo && salvo.ref){ referrerCode = salvo.ref; por = por || salvo.por || ''; }
+}catch(e){}
+}
+if(por){
+referrerNameEl.value = por;
+if(referrerCode){
+referrerNameEl.readOnly = true;
+document.getElementById('referrerHint').hidden = false;
+}
+}
+}catch(e){}
+})();
+var audioCtx = null;
+function ensureAudio(){
+if(audioCtx) return audioCtx;
+try{
+var Ctx = window.AudioContext || window.webkitAudioContext;
+if(!Ctx) return null;
+audioCtx = new Ctx();
+}catch(e){ audioCtx = null; }
+return audioCtx;
+}
+function tone(freq, start, dur, opts){
+var ctx = audioCtx;
+if(!ctx) return;
+opts = opts || {};
+try{
+var osc = ctx.createOscillator();
+var gain = ctx.createGain();
+osc.type = opts.type || 'sine';
+osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+var peak = opts.gain != null ? opts.gain : .08;
+gain.gain.setValueAtTime(0, ctx.currentTime + start);
+gain.gain.linearRampToValueAtTime(peak, ctx.currentTime + start + (opts.attack || .012));
+gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + dur);
+osc.connect(gain).connect(ctx.destination);
+osc.start(ctx.currentTime + start);
+osc.stop(ctx.currentTime + start + dur + .03);
+}catch(e){}
+}
+function playTick(){
+if(!ensureAudio()) return;
+tone(920, 0, .09, {type:'sine', gain:.045, attack:.004});
+}
+function playStepChime(){
+if(!ensureAudio()) return;
+tone(523.25, 0, .16, {type:'sine', gain:.06});
+tone(659.25, .07, .22, {type:'sine', gain:.075});
+}
+function playSuccessChime(){
+if(!ensureAudio()) return;
+tone(1046.5, 0, .45, {type:'triangle', gain:.09});
+tone(1318.51, .06, .5, {type:'triangle', gain:.095});
+tone(1567.98, .12, .62, {type:'triangle', gain:.09});
+tone(2093, .18, .8, {type:'sine', gain:.075});
+}
+function setFieldState(fieldEl, errorEl, state){
+fieldEl.classList.remove('is-invalid', 'is-valid');
+if(state === null){
+errorEl.textContent = '';
+} else if(state === 'ok'){
+fieldEl.classList.add('is-valid');
+errorEl.textContent = '';
+} else {
+fieldEl.classList.add('is-invalid');
+errorEl.textContent = state;
+}
+}
+function formatBRPhone(raw){
+var digits = raw.replace(/\D/g, '').slice(0, 11);
+if(digits.length <= 2) return digits.replace(/^(\d{0,2})/, '($1');
+if(digits.length <= 6) return digits.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+if(digits.length <= 10) return digits.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+return digits.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+}
+function isValidBRPhone(raw){
+var digits = raw.replace(/\D/g, '');
+if(digits.length !== 10 && digits.length !== 11) return false;
+var ddd = parseInt(digits.slice(0, 2), 10);
+return ddd >= 11 && ddd <= 99;
+}
+function isValidEmail(value){
+return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+}
+function validateWhatsappField(){
+var v = leadWhatsappEl.value.trim();
+if(!v){ setFieldState(whatsappFieldEl, whatsappErrorEl, null); return false; }
+if(!isValidBRPhone(v)){
+setFieldState(whatsappFieldEl, whatsappErrorEl, 'Confirma o número com DDD, tipo (11) 91234-5678.');
+return false;
+}
+setFieldState(whatsappFieldEl, whatsappErrorEl, 'ok');
+return true;
+}
+function validateEmailField(){
+var v = leadEmailEl.value.trim();
+if(!v){
+setFieldState(emailFieldEl, emailErrorEl, 'Preenche seu e-mail pra gente continuar.');
+return false;
+}
+if(!isValidEmail(v)){
+setFieldState(emailFieldEl, emailErrorEl, 'Esse e-mail não parece completo — confirma o formato, tipo nome@empresa.com.');
+return false;
+}
+setFieldState(emailFieldEl, emailErrorEl, 'ok');
+return true;
+}
+leadWhatsappEl.addEventListener('input', function(){
+var atEnd = leadWhatsappEl.selectionEnd === leadWhatsappEl.value.length;
+leadWhatsappEl.value = formatBRPhone(leadWhatsappEl.value);
+if(atEnd){ leadWhatsappEl.selectionStart = leadWhatsappEl.selectionEnd = leadWhatsappEl.value.length; }
+if(whatsappFieldEl.classList.contains('is-invalid')) validateWhatsappField();
+});
+leadWhatsappEl.addEventListener('blur', validateWhatsappField);
+leadEmailEl.addEventListener('blur', validateEmailField);
+leadEmailEl.addEventListener('input', function(){
+if(emailFieldEl.classList.contains('is-invalid')) validateEmailField();
+});
+function pct(filled, total){
+return Math.max(0, Math.min(100, Math.round(filled / total * 100)));
+}
+function updateStep1Progress(){
+var fields = [referrerNameEl, leadNameEl, leadWhatsappEl];
+var filled = fields.filter(function(f){ return f.value.trim().length > 0; }).length;
+fillStep1.style.width = pct(filled, 3) + '%';
+}
+function updateStep2Progress(){
+var fields = [companyEl, nicheEl, needEl, leadEmailEl, bestTimeEl, meetingDateEl];
+var filled = fields.filter(function(f){ return f.value && f.value.trim().length > 0; }).length;
+fillStep2.style.width = pct(filled, 6) + '%';
+}
+[referrerNameEl, leadNameEl, leadWhatsappEl].forEach(function(el){
+el.addEventListener('input', updateStep1Progress);
+});
+[companyEl, nicheEl, needEl, leadEmailEl].forEach(function(el){
+el.addEventListener('input', updateStep2Progress);
+});
+[bestTimeEl, meetingDateEl].forEach(function(el){
+el.addEventListener('change', updateStep2Progress);
+});
+updateStep1Progress();
+updateStep2Progress();
+function watchFieldFill(el, eventName){
+var wasFilled = !!(el.value && el.value.trim().length > 0);
+el.addEventListener(eventName, function(){
+var isFilled = !!(el.value && el.value.trim().length > 0);
+if(isFilled && !wasFilled) playTick();
+wasFilled = isFilled;
+});
+}
+[referrerNameEl, leadNameEl, leadWhatsappEl, companyEl, nicheEl, needEl, leadEmailEl].forEach(function(el){
+watchFieldFill(el, 'input');
+});
+[bestTimeEl, meetingDateEl].forEach(function(el){
+watchFieldFill(el, 'change');
+});
+function goStep(n){
+if(n === 1){
+fieldsetStep1.classList.remove('fieldset-hidden');
+fieldsetStep2.classList.add('fieldset-hidden');
+stepLabel.textContent = 'Passo 1 de 2 — o essencial';
+updateStep1Progress();
+} else {
+fieldsetStep1.classList.add('fieldset-hidden');
+fieldsetStep2.classList.remove('fieldset-hidden');
+stepLabel.textContent = 'Passo 2 de 2 — contexto pro nosso time';
+fillStep1.style.width = '100%';
+updateStep2Progress();
+}
+}
+document.getElementById('toStep2').addEventListener('click', function(){
+var referrerName = referrerNameEl.value.trim();
+var leadName = leadNameEl.value.trim();
+var leadWhatsapp = leadWhatsappEl.value.trim();
+if(!referrerName || !leadName || !leadWhatsapp){
+step1Error.textContent = 'Preenche esses três campos pra continuar.';
+return;
+}
+if(!validateWhatsappField()){
+step1Error.textContent = 'Confirma seu WhatsApp com DDD antes de continuar.';
+return;
+}
+step1Error.textContent = '';
+playStepChime();
+goStep(2);
+});
+document.getElementById('toStep1').addEventListener('click', function(){
+goStep(1);
+});
+function spawnBurst(){
+confirmBurst.innerHTML = '';
+var n = 14;
+for(var i = 0; i < n; i++){
+var angle = (Math.PI * 2 / n) * i + (Math.random() * 0.4 - 0.2);
+var dist = 46 + Math.random() * 40;
+var tx = Math.cos(angle) * dist;
+var ty = Math.sin(angle) * dist;
+var s = document.createElement('span');
+s.className = 'spark';
+s.style.setProperty('--tx', tx.toFixed(1) + 'px');
+s.style.setProperty('--ty', ty.toFixed(1) + 'px');
+s.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+s.style.background = (i % 2 === 0) ? 'var(--violet)' : 'var(--azure)';
+confirmBurst.appendChild(s);
+}
+}
+form.addEventListener('submit', async function(ev){
+ev.preventDefault();
+step2Error.textContent = '';
+var requiredStep2 = [companyEl, nicheEl, needEl, bestTimeEl, meetingDateEl];
+var missing = requiredStep2.some(function(f){ return !f.value || !f.value.trim(); });
+if(missing){
+step2Error.textContent = 'Preenche todos os campos pra gente continuar.';
+return;
+}
+if(!validateEmailField()){
+step2Error.textContent = 'Confirma o formato do e-mail antes de enviar.';
+return;
+}
+var payload = {
+referrerName: referrerNameEl.value.trim(),
+referrerCode: referrerCode,
+website: (document.getElementById('website')||{}).value || '',
+leadName: leadNameEl.value.trim(),
+leadWhatsapp: leadWhatsappEl.value.trim(),
+company: companyEl.value.trim(),
+niche: nicheEl.value.trim(),
+need: needEl.value.trim(),
+leadEmail: leadEmailEl.value.trim(),
+bestTime: bestTimeEl.value,
+preferredDate: meetingDateEl.value,
+status: 'novo',
+createdAt: new Date().toISOString()
+};
+submitBtn.disabled = true;
+submitBtn.textContent = 'Enviando...';
+try{
+if(ENDPOINT){
+var resp = await fetch(ENDPOINT, {
+method: 'POST',
+headers: {'Content-Type': 'application/json'},
+body: JSON.stringify(payload)
+});
+if(!resp.ok) throw new Error('endpoint-' + resp.status);
+} else {
+if(typeof claude === 'undefined' || !claude.use){
+throw new Error('no-runtime');
+}
+var db = await claude.use('db');
+if(!db){
+throw new Error('no-db');
+}
+await db.collection('indicacoes').add(payload);
+}
+form.hidden = true;
+document.querySelector('.steps').parentElement.hidden = true;
+var introSubEl = document.getElementById('introSub');
+if(introSubEl) introSubEl.hidden = true;
+spawnBurst();
+confirmView.hidden = false;
+card.classList.remove('is-active');
+card.classList.add('is-live');
+page.classList.add('is-confirmed');
+playSuccessChime();
+} catch(err){
+step2Error.textContent = 'Não deu pra enviar agora. Manda direto pro time enquanto a gente resolve isso.';
+submitBtn.disabled = false;
+submitBtn.textContent = 'Fazer parte';
+}
+});
+var gate = document.getElementById('gate');
+var gateCta = document.getElementById('gateCta');
+var page = document.getElementById('page');
+var reduceMotion = false;
+try{
+reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}catch(e){}
+document.documentElement.classList.add('gate-lock');
+if(reduceMotion){
+gate.classList.add('is-ready');
+} else {
+setTimeout(function(){ gate.classList.add('is-ready'); }, 4500);
+}
+function openForm(){
+if(!gate.classList.contains('is-ready')) return;
+ensureAudio();
+gate.classList.add('gate-exit');
+document.documentElement.classList.remove('gate-lock');
+page.classList.add('page-in');
+card.classList.add('is-active');
+document.querySelector('.ambient').classList.add('is-active');
+setTimeout(function(){ gate.hidden = true; }, reduceMotion ? 0 : 650);
+}
+gateCta.addEventListener('click', openForm);
+var rafPending = false, lastX = null, lastY = null;
+function applyPointer(){
+rafPending = false;
+if(lastX === null) return;
+var nx = ((lastX / window.innerWidth) - 0.5) * 2;
+var ny = ((lastY / window.innerHeight) - 0.5) * 2;
+var root = document.documentElement.style;
+root.setProperty('--mx', nx.toFixed(3));
+root.setProperty('--my', ny.toFixed(3));
+root.setProperty('--px', lastX + 'px');
+root.setProperty('--py', lastY + 'px');
+}
+function onPointerMove(e){
+lastX = e.clientX; lastY = e.clientY;
+if(!rafPending){
+rafPending = true;
+requestAnimationFrame(applyPointer);
+}
+}
+window.addEventListener('pointermove', onPointerMove, {passive:true});
+})();
+</script></body></html>

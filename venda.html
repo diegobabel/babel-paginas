@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Registro de venda · babel</title>
+<link rel="icon" href="/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#050410;--surface:#0E0B22;--surface-2:#141031;--border:rgba(139,111,224,.22);--text:#F3F1FA;--text-2:#ABA3C9;--text-3:#726A93;--violet:#8B6FE0;--azure:#4C86E8;--grad:linear-gradient(135deg,#8B6FE0,#4C86E8);--ok:#4ADE80;--bad:#F2876B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;background:var(--ink);color:var(--text);font-family:Poppins,system-ui,-apple-system,sans-serif;display:flex;justify-content:center;padding:40px 18px 56px}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60vmax 60vmax at 0% 0%,rgba(74,47,150,.38),transparent 60%),radial-gradient(60vmax 60vmax at 100% 100%,rgba(53,104,207,.34),transparent 60%)}
+.page{width:100%;max-width:520px;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;justify-content:center}
+.brand img{width:34px;height:34px;border-radius:50%;background:#000;object-fit:cover}
+.brand span{font-family:Lora,Georgia,serif;font-size:18px}
+.intro{text-align:center}
+.eyebrow{text-transform:uppercase;letter-spacing:2.2px;font-size:11px;color:var(--violet);font-weight:600;margin:0 0 6px}
+h1{font-family:Lora,Georgia,serif;font-weight:600;font-size:25px;line-height:1.25;margin:0 0 8px;text-wrap:balance}
+.intro p{margin:0;color:var(--text-2);font-size:14px;line-height:1.55}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px 22px;box-shadow:0 0 40px -18px rgba(139,111,224,.45)}
+form{display:flex;flex-direction:column;gap:16px}
+.sec{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:600;margin:6px 0 -4px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:460px){.row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+label{font-size:12.5px;color:var(--text-2);font-weight:500}
+input,select{appearance:none;width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;color:var(--text);font:inherit;font-size:15px}
+input::placeholder{color:var(--text-3)}
+input:focus,select:focus{outline:2px solid var(--violet);outline-offset:1px;border-color:transparent}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%23ABA3C9' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:18px;padding-right:38px}
+select option{background:#141031;color:var(--text)}
+.field.bad input,.field.bad select,.field.bad .drop{border-color:var(--bad)}
+.err{font-size:11.5px;color:var(--bad);min-height:0;margin:0}
+.planos{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.plano{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--text-2);background:rgba(139,111,224,.07);border:1px solid transparent;border-radius:8px;padding:7px 10px}
+.plano b{color:var(--text);font-weight:600}
+.plano.on{border-color:var(--violet);background:rgba(139,111,224,.16)}
+.drop{position:relative;border:1.5px dashed var(--border);border-radius:12px;padding:16px;text-align:center;background:var(--surface-2);cursor:pointer;transition:border-color .2s}
+.drop:hover,.drop.over{border-color:var(--violet)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop strong{display:block;font-size:14px;font-weight:600}
+.drop small{color:var(--text-3);font-size:12px}
+.drop.has strong{color:var(--ok)}
+button{width:100%;border:0;border-radius:10px;padding:14px;font:inherit;font-weight:700;font-size:15px;color:#fff;background:var(--grad);cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.formerr{font-size:12.5px;color:var(--bad);text-align:center;margin:0}
+.ok{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:10px 0}
+.ok .badge{width:54px;height:54px;border-radius:50%;background:var(--grad);display:grid;place-items:center}
+.ok h2{font-family:Lora,Georgia,serif;font-size:21px;margin:4px 0 0}
+.ok p{margin:0;color:var(--text-2);font-size:14px;line-height:1.55}
+.ok button{margin-top:10px;background:transparent;border:1px solid var(--border);color:var(--text-2)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.foot{text-align:center;color:var(--text-3);font-size:11.5px}
+[hidden]{display:none!important}
+</style></head>
+<body>
+<main class="page">
+  <div class="brand"><img src="/logo.webp" alt=""><span>babel</span></div>
+  <div class="intro">
+    <p class="eyebrow">Registro de venda</p>
+    <h1>Fechou uma venda? Registre aqui.</h1>
+    <p>Preencha os dados da venda e anexe o comprovante. O time babel confere e cadastra o cliente.</p>
+  </div>
+  <div class="card">
+    <form id="f" novalidate>
+      <div class="hp" aria-hidden="true"><label for="website">Não preencha</label><input id="website" tabindex="-1" autocomplete="off"></div>
+
+      <p class="sec">A venda</p>
+      <div class="field" id="w_vend"><label for="vendedorNome">Nome do vendedor ou parceiro</label>
+        <input id="vendedorNome" type="text" autocomplete="name" placeholder="Seu nome"><p class="err"></p></div>
+      <div class="row">
+        <div class="field" id="w_data"><label for="dataVenda">Data da venda</label>
+          <input id="dataVenda" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10"><p class="err"></p></div>
+        <div class="field" id="w_setup"><label for="setup">Preço da venda (setup)</label>
+          <input id="setup" type="text" inputmode="numeric" placeholder="R$ 0,00"><p class="err"></p></div>
+      </div>
+      <div class="field" id="w_plano"><label for="plano">Plano mensal</label>
+        <select id="plano"><option value="" selected disabled>Selecione o plano</option>
+          <option value="vip">Plano VIP — R$ 12.000,00/mês</option>
+          <option value="profissional">Plano Profissional — R$ 9.000,00/mês</option>
+          <option value="basico">Plano Básico — R$ 3.000,00/mês</option>
+        </select>
+        <div class="planos" aria-label="O que cada plano inclui">
+          <div class="plano" data-p="vip"><span><b>VIP</b> · até 10 mil leads</span><span>R$ 12.000,00/mês</span></div>
+          <div class="plano" data-p="profissional"><span><b>Profissional</b> · até 5 mil leads</span><span>R$ 9.000,00/mês</span></div>
+          <div class="plano" data-p="basico"><span><b>Básico</b> · até 1 mil leads</span><span>R$ 3.000,00/mês</span></div>
+        </div><p class="err"></p></div>
+      <div class="field" id="w_arq"><label for="arquivo">Comprovante de pagamento</label>
+        <div class="drop" id="drop"><input id="arquivo" type="file" accept="application/pdf,image/jpeg,image/png,image/webp">
+          <strong id="dropT">Toque para anexar o comprovante</strong><small id="dropS">PDF, JPG, PNG ou WEBP · até 3 MB</small></div><p class="err"></p></div>
+
+      <p class="sec">O cliente</p>
+      <div class="row">
+        <div class="field" id="w_cli"><label for="clienteNome">Nome do cliente</label>
+          <input id="clienteNome" type="text" placeholder="Nome completo"><p class="err"></p></div>
+        <div class="field" id="w_emp"><label for="empresa">Nome da empresa</label>
+          <input id="empresa" type="text" placeholder="Empresa"><p class="err"></p></div>
+      </div>
+      <div class="field" id="w_nicho"><label for="nicho">Nicho</label>
+        <input id="nicho" type="text" placeholder="Ex.: clínica odontológica, loja de roupas"><p class="err"></p></div>
+      <div class="row">
+        <div class="field" id="w_wa"><label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" type="tel" inputmode="tel" placeholder="(00) 00000-0000" maxlength="15"><p class="err"></p></div>
+        <div class="field" id="w_mail"><label for="email">E-mail</label>
+          <input id="email" type="email" inputmode="email" placeholder="nome@empresa.com"><p class="err"></p></div>
+      </div>
+      <p class="formerr" id="formerr" hidden></p>
+      <button type="submit" id="enviar">Registrar venda</button>
+    </form>
+    <div class="ok" id="ok" hidden>
+      <div class="badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Venda registrada.</h2>
+      <p>O time babel vai conferir o comprovante e cadastrar o cliente. Obrigado!</p>
+      <button type="button" id="outra">Registrar outra venda</button>
+    </div>
+  </div>
+  <p class="foot">babel · Consciência Artificial</p>
+</main>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+  var MAX=3*1024*1024, TIPOS={'application/pdf':1,'image/jpeg':1,'image/png':1,'image/webp':1};
+  var codigo='', arquivo=null;
+
+  try{
+    var q=new URLSearchParams(location.search);
+    codigo=(q.get('v')||'').toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,40);
+    var n=(q.get('n')||'').trim().slice(0,120);
+    if(codigo){try{localStorage.setItem('babelVend',JSON.stringify({v:codigo,n:n}));}catch(e){}}
+    else{try{var s=JSON.parse(localStorage.getItem('babelVend')||'null');if(s&&s.v){codigo=s.v;n=n||s.n||'';}}catch(e){}}
+    if(n)$('vendedorNome').value=n;
+  }catch(e){}
+
+  function hoje(){var d=new Date();return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}
+  $('dataVenda').value=hoje();
+
+  $('dataVenda').addEventListener('input',function(){
+    var d=this.value.replace(/\D/g,'').slice(0,8);
+    this.value=d.length>4?d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4):d.length>2?d.slice(0,2)+'/'+d.slice(2):d;
+  });
+  $('setup').addEventListener('input',function(){
+    var d=this.value.replace(/\D/g,'').replace(/^0+/,'').slice(0,12);
+    this.value=d?BRL.format(+d/100):'';
+  });
+  $('whatsapp').addEventListener('input',function(){
+    var d=this.value.replace(/\D/g,'').slice(0,11);
+    this.value=d.length<=2?(d?'('+d:''):d.length<=6?'('+d.slice(0,2)+') '+d.slice(2):d.length<=10?'('+d.slice(0,2)+') '+d.slice(2,6)+'-'+d.slice(6):'('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7);
+  });
+  $('plano').addEventListener('change',function(){
+    var v=this.value;
+    document.querySelectorAll('.plano').forEach(function(el){el.classList.toggle('on',el.dataset.p===v);});
+    marcar('w_plano','');
+  });
+
+  var drop=$('drop');
+  function escolher(f){
+    arquivo=null; drop.classList.remove('has');
+    $('dropT').textContent='Toque para anexar o comprovante';
+    $('dropS').textContent='PDF, JPG, PNG ou WEBP · até 3 MB';
+    if(!f)return;
+    if(!TIPOS[f.type]){marcar('w_arq','Envie o comprovante em PDF, JPG, PNG ou WEBP.');return;}
+    if(f.size>MAX){marcar('w_arq','O arquivo passa de 3 MB. Envie uma foto ou PDF menor.');return;}
+    arquivo=f; drop.classList.add('has');
+    $('dropT').textContent=f.name;
+    $('dropS').textContent=(f.size/1024<1024?Math.round(f.size/1024)+' KB':(f.size/1048576).toFixed(1)+' MB')+' · toque para trocar';
+    marcar('w_arq','');
+  }
+  $('arquivo').addEventListener('change',function(){escolher(this.files&&this.files[0]);});
+  ['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over');});});
+  ['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(){drop.classList.remove('over');});});
+  drop.addEventListener('drop',function(e){e.preventDefault();escolher(e.dataTransfer.files[0]);});
+
+  function marcar(id,msg){var w=$(id);w.classList.toggle('bad',!!msg);w.querySelector('.err').textContent=msg||'';}
+  function dataOk(t){
+    var m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(t);if(!m)return false;
+    var d=new Date(+m[3],+m[2]-1,+m[1]);
+    return d.getDate()===+m[1]&&d.getMonth()===+m[2]-1&&+m[3]>=2020;
+  }
+  function valor(t){var d=String(t).replace(/\D/g,'');return d?+d/100:0;}
+  ['vendedorNome','clienteNome','empresa','nicho','whatsapp','email','dataVenda','setup'].forEach(function(id){
+    $(id).addEventListener('input',function(){var w=this.closest('.field');if(w.classList.contains('bad'))marcar(w.id,'');});
+  });
+
+  function validar(){
+    var ok=true;
+    function req(id,w,msg){if(!$(id).value.trim()){marcar(w,msg);ok=false;}else marcar(w,'');}
+    req('vendedorNome','w_vend','Informe seu nome.');
+    if(!dataOk($('dataVenda').value)){marcar('w_data','Use o formato dd/mm/aaaa.');ok=false;}else marcar('w_data','');
+    if(valor($('setup').value)<=0){marcar('w_setup','Informe o valor do setup.');ok=false;}else marcar('w_setup','');
+    if(!$('plano').value){marcar('w_plano','Escolha o plano mensal.');ok=false;}
+    if(!arquivo){marcar('w_arq','Anexe o comprovante de pagamento.');ok=false;}
+    req('clienteNome','w_cli','Informe o nome do cliente.');
+    req('empresa','w_emp','Informe o nome da empresa.');
+    req('nicho','w_nicho','Informe o nicho.');
+    var wa=$('whatsapp').value.replace(/\D/g,'');
+    if(wa.length<10){marcar('w_wa','WhatsApp com DDD.');ok=false;}else marcar('w_wa','');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('email').value.trim())){marcar('w_mail','E-mail inválido.');ok=false;}else marcar('w_mail','');
+    return ok;
+  }
+  function base64(f){
+    return new Promise(function(res,rej){
+      var r=new FileReader();
+      r.onload=function(){res(String(r.result).split(',')[1]||'');};
+      r.onerror=function(){rej(r.error);};
+      r.readAsDataURL(f);
+    });
+  }
+
+  $('f').addEventListener('submit',async function(e){
+    e.preventDefault();
+    $('formerr').hidden=true;
+    if(!validar()){
+      var p=document.querySelector('.field.bad');
+      if(p)p.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+    var btn=$('enviar');btn.disabled=true;btn.textContent='Enviando…';
+    try{
+      var corpo={
+        website:$('website').value,
+        vendedorNome:$('vendedorNome').value.trim(),
+        vendedorCodigo:codigo,
+        dataVenda:$('dataVenda').value,
+        setup:valor($('setup').value),
+        plano:$('plano').value,
+        clienteNome:$('clienteNome').value.trim(),
+        empresa:$('empresa').value.trim(),
+        nicho:$('nicho').value.trim(),
+        whatsapp:$('whatsapp').value.trim(),
+        email:$('email').value.trim(),
+        comprovante:{nome:arquivo.name,tipo:arquivo.type,base64:await base64(arquivo)}
+      };
+      var r=await fetch('/api/vendas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo)});
+      if(!r.ok)throw new Error(String(r.status));
+      $('f').hidden=true;$('ok').hidden=false;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }catch(err){
+      $('formerr').textContent=err&&err.message==='413'
+        ?'O comprovante ficou grande demais para enviar. Tente uma foto menor.'
+        :'Não deu para registrar agora. Tente de novo em instantes ou avise o time babel.';
+      $('formerr').hidden=false;
+    }
+    btn.disabled=false;btn.textContent='Registrar venda';
+  });
+
+  $('outra').addEventListener('click',function(){
+    var nome=$('vendedorNome').value;
+    $('f').reset();$('vendedorNome').value=nome;$('dataVenda').value=hoje();
+    escolher(null);
+    document.querySelectorAll('.plano').forEach(function(el){el.classList.remove('on');});
+    $('ok').hidden=true;$('f').hidden=false;
+  });
+})();
+</script>
+</body></html>
