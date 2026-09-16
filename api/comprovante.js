@@ -1,13 +1,15 @@
-import { get } from '@vercel/blob';
+import { supabase, configurado, BUCKET } from './_supabase.js';
 
-// Serve os comprovantes, que são gravados como privados no Blob.
+// Serve os comprovantes, que ficam num bucket privado do Supabase Storage.
 // Só responde com a CHAVE_LEITURA — a mesma usada pelo Babel-OS nos GETs de /api/vendas.
 const CHAVE_LEITURA = process.env.CHAVE_LEITURA;
-const PREFIXO = 'comprovantes/';
+
+// O bucket já delimita o escopo; o path é só o nome do arquivo dentro dele.
+const CAMINHO_OK = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
 export default async function handler(req, res){
   res.setHeader('Cache-Control', 'no-store');
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  if (!configurado) {
     return res.status(503).json({ ok:false, erro:'armazenamento-nao-configurado' });
   }
   if (!CHAVE_LEITURA) return res.status(503).json({ ok:false, erro:'chave-nao-configurada' });
@@ -23,15 +25,15 @@ export default async function handler(req, res){
   }
 
   const path = url.searchParams.get('path') || '';
-  if (!path.startsWith(PREFIXO) || path.includes('..')) {
+  if (!CAMINHO_OK.test(path) || path.includes('..')) {
     return res.status(400).json({ ok:false, erro:'caminho-invalido' });
   }
 
-  const r = await get(path, { access:'private', useCache:false });
-  if (!r) return res.status(404).json({ ok:false, erro:'nao-encontrado' });
+  const { data, error } = await supabase().storage.from(BUCKET).download(path);
+  if (error || !data) return res.status(404).json({ ok:false, erro:'nao-encontrado' });
 
-  const bytes = Buffer.from(await new Response(r.stream).arrayBuffer());
-  res.setHeader('Content-Type', r.blob?.contentType || 'application/octet-stream');
+  const bytes = Buffer.from(await data.arrayBuffer());
+  res.setHeader('Content-Type', data.type || 'application/octet-stream');
   res.setHeader('Content-Length', String(bytes.length));
   return res.status(200).send(bytes);
 }

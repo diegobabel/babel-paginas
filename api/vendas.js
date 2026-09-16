@@ -1,11 +1,11 @@
-import { put, list, get } from '@vercel/blob';
+import { randomUUID } from 'node:crypto';
+import { supabase, configurado, iso, lerTudo, BUCKET } from './_supabase.js';
 
 // Configure CHAVE_LEITURA nas env vars do projeto na Vercel.
 const CHAVE_LEITURA = process.env.CHAVE_LEITURA;
-const PREFIXO = 'vendas/';
 const PLANOS = ['vip', 'profissional', 'basico'];
 const TIPOS = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
-const MAX_ARQUIVO = 3 * 1024 * 1024;
+const MAX_ARQUIVO = 3 * 1024 * 1024; // igual ao file_size_limit do bucket
 
 export const config = { api: { bodyParser: { sizeLimit: '4.5mb' } } };
 
@@ -27,9 +27,34 @@ function dataValida(t){
   return m[3] + '-' + m[2] + '-' + m[1];
 }
 
+function paraJson(r){
+  return {
+    id: r.id,
+    vendedorNome: r.vendedor_nome,
+    vendedorCodigo: r.vendedor_codigo,
+    dataVenda: r.data_venda,
+    setup: Number(r.setup),
+    plano: r.plano,
+    clienteNome: r.cliente_nome,
+    empresa: r.empresa,
+    nicho: r.nicho,
+    whatsapp: r.whatsapp,
+    email: r.email,
+    comprovante: {
+      path: r.comprovante_path,
+      url: '/api/comprovante?path=' + encodeURIComponent(r.comprovante_path),
+      nome: r.comprovante_nome,
+      tipo: r.comprovante_tipo
+    },
+    status: r.status,
+    origem: r.origem,
+    createdAt: iso(r.created_at)
+  };
+}
+
 export default async function handler(req, res){
   res.setHeader('Cache-Control', 'no-store');
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  if (!configurado) {
     return res.status(503).json({ ok:false, erro:'armazenamento-nao-configurado' });
   }
 
@@ -38,45 +63,52 @@ export default async function handler(req, res){
     if (!b || typeof b !== 'object') return res.status(400).json({ ok:false, erro:'corpo-invalido' });
     if (b.website) return res.status(200).json({ ok:true });
     const v = {
-      vendedorNome: limpar(b.vendedorNome, 120),
-      vendedorCodigo: limpar(b.vendedorCodigo, 40).toUpperCase().replace(/[^A-Z0-9-]/g, ''),
-      dataVenda: dataValida(limpar(b.dataVenda, 10)),
+      vendedor_nome: limpar(b.vendedorNome, 120),
+      vendedor_codigo: limpar(b.vendedorCodigo, 40).toUpperCase().replace(/[^A-Z0-9-]/g, ''),
+      data_venda: dataValida(limpar(b.dataVenda, 10)),
       setup: Math.max(0, Math.round(Number(b.setup) * 100) / 100 || 0),
       plano: PLANOS.includes(b.plano) ? b.plano : '',
-      clienteNome: limpar(b.clienteNome, 120),
+      cliente_nome: limpar(b.clienteNome, 120),
       empresa: limpar(b.empresa, 160),
       nicho: limpar(b.nicho, 120),
       whatsapp: limpar(b.whatsapp, 20),
       email: limpar(b.email, 160)
     };
-    if (!v.vendedorNome || !v.dataVenda || !v.plano || !v.clienteNome || !v.empresa || !v.whatsapp || !v.email) {
+    if (!v.vendedor_nome || !v.data_venda || !v.plano || !v.cliente_nome || !v.empresa || !v.whatsapp || !v.email) {
       return res.status(400).json({ ok:false, erro:'campos-obrigatorios' });
     }
-    const agora = new Date();
-    const id = agora.getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+
     const arq = b.comprovante;
     if (!arq || !TIPOS[arq.tipo] || typeof arq.base64 !== 'string') {
       return res.status(400).json({ ok:false, erro:'comprovante' });
     }
     const bytes = Buffer.from(arq.base64, 'base64');
     if (!bytes.length || bytes.length > MAX_ARQUIVO) return res.status(400).json({ ok:false, erro:'comprovante-tamanho' });
-    // Comprovante é documento financeiro: gravado como privado e servido só via /api/comprovante com chave.
-    const up = await put('comprovantes/' + id + '.' + TIPOS[arq.tipo], bytes, {
-      access: 'private', contentType: arq.tipo, addRandomSuffix: true
-    });
-    v.comprovante = {
-      path: up.pathname,
-      url: '/api/comprovante?path=' + encodeURIComponent(up.pathname),
-      nome: limpar(arq.nome, 120) || ('comprovante.' + TIPOS[arq.tipo]),
-      tipo: arq.tipo
-    };
-    v.id = 'vv-' + id;
+
+    const id = randomUUID();
+    const caminho = id + '.' + TIPOS[arq.tipo];
+    // Comprovante é documento financeiro: bucket privado, servido só via /api/comprovante com chave.
+    const { error: erroUp } = await supabase().storage.from(BUCKET)
+      .upload(caminho, bytes, { contentType: arq.tipo, upsert: false });
+    if (erroUp) {
+      console.error('vendas: falha ao subir comprovante', erroUp);
+      return res.status(500).json({ ok:false, erro:'falha-ao-gravar' });
+    }
+
+    v.id = id;
+    v.comprovante_path = caminho;
+    v.comprovante_nome = limpar(arq.nome, 120) || ('comprovante.' + TIPOS[arq.tipo]);
+    v.comprovante_tipo = arq.tipo;
     v.status = 'pendente';
     v.origem = 'pagina';
-    v.createdAt = agora.toISOString();
-    await put(PREFIXO + id + '.json', JSON.stringify(v), {
-      access: 'private', contentType: 'application/json', addRandomSuffix: true
-    });
+
+    const { error } = await supabase().from('vendas').insert(v);
+    if (error) {
+      // Sem a linha o arquivo fica órfão e inalcançável: desfaz o upload.
+      await supabase().storage.from(BUCKET).remove([caminho]).catch(() => {});
+      console.error('vendas: falha ao gravar', error);
+      return res.status(500).json({ ok:false, erro:'falha-ao-gravar' });
+    }
     return res.status(200).json({ ok:true });
   }
 
@@ -84,27 +116,13 @@ export default async function handler(req, res){
     if (!CHAVE_LEITURA) return res.status(503).json({ ok:false, erro:'chave-nao-configurada' });
     const url = new URL(req.url, 'http://x');
     if (url.searchParams.get('chave') !== CHAVE_LEITURA) return res.status(401).json({ ok:false, erro:'nao-autorizado' });
-    const desde = url.searchParams.get('desde') || '';
-    const blobs = [];
-    let cursor;
-    do {
-      const pg = await list({ prefix: PREFIXO, cursor, limit: 1000 });
-      blobs.push(...pg.blobs);
-      cursor = pg.hasMore ? pg.cursor : undefined;
-    } while (cursor);
-    const alvo = blobs.filter(x => !desde || new Date(x.uploadedAt).toISOString() > desde);
-    const itens = [];
-    for (let i = 0; i < alvo.length; i += 10) {
-      const lote = await Promise.all(alvo.slice(i, i + 10).map(async x => {
-        try {
-          const r = await get(x.pathname, { access:'private', useCache:false });
-          return r ? await new Response(r.stream).json() : null;
-        } catch { return null; }
-      }));
-      itens.push(...lote.filter(Boolean));
+    try {
+      const itens = (await lerTudo('vendas', url.searchParams.get('desde') || '')).map(paraJson);
+      return res.status(200).json({ ok:true, total: itens.length, vendas: itens });
+    } catch (e) {
+      console.error('vendas: falha ao ler', e);
+      return res.status(500).json({ ok:false, erro:'falha-ao-ler' });
     }
-    itens.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1));
-    return res.status(200).json({ ok:true, total: itens.length, vendas: itens });
   }
 
   res.setHeader('Allow', 'GET, POST');
