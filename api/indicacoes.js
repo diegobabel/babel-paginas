@@ -1,7 +1,8 @@
-import { put, list } from '@vercel/blob';
+import { put, list, get } from '@vercel/blob';
 
 // Chave usada pelo Babel-OS para ler as respostas (GET). O formulário público só grava (POST).
-const CHAVE_LEITURA = 'ynKzMeXorDXNObdpfsLL647faUyyEZLZ';
+// Configure CHAVE_LEITURA nas env vars do projeto na Vercel.
+const CHAVE_LEITURA = process.env.CHAVE_LEITURA;
 const PREFIXO = 'indicacoes/';
 
 const CAMPOS = ['referrerName','referrerCode','leadName','leadWhatsapp','company','niche',
@@ -38,12 +39,13 @@ export default async function handler(req, res){
     const id = agora.getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
     r.id = 'vc-' + id;
     await put(PREFIXO + id + '.json', JSON.stringify(r), {
-      access: 'public', contentType: 'application/json', addRandomSuffix: true
+      access: 'private', contentType: 'application/json', addRandomSuffix: true
     });
     return res.status(200).json({ ok:true });
   }
 
   if (req.method === 'GET') {
+    if (!CHAVE_LEITURA) return res.status(503).json({ ok:false, erro:'chave-nao-configurada' });
     const url = new URL(req.url, 'http://x');
     if (url.searchParams.get('chave') !== CHAVE_LEITURA) return res.status(401).json({ ok:false, erro:'nao-autorizado' });
     const desde = url.searchParams.get('desde') || '';
@@ -58,8 +60,10 @@ export default async function handler(req, res){
     const itens = [];
     for (let i = 0; i < alvo.length; i += 10) {
       const lote = await Promise.all(alvo.slice(i, i + 10).map(async b => {
-        try { const r = await fetch(b.url, { cache:'no-store' }); return r.ok ? await r.json() : null; }
-        catch { return null; }
+        try {
+          const r = await get(b.pathname, { access:'private', useCache:false });
+          return r ? await new Response(r.stream).json() : null;
+        } catch { return null; }
       }));
       itens.push(...lote.filter(Boolean));
     }

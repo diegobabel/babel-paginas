@@ -237,6 +237,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
       $('f').hidden=true;$('ok').hidden=false;
       window.scrollTo({top:0,behavior:'smooth'});
     }catch(err){
+      console.error('falha ao registrar venda:', err);
       $('formerr').textContent=err&&err.message==='413'
         ?'O comprovante ficou grande demais para enviar. Tente uma foto menor.'
         :'Não deu para registrar agora. Tente de novo em instantes ou avise o time babel.';
